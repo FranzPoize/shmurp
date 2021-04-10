@@ -65,8 +65,8 @@ private:
 template <class T_value, class T_interpolant>
 T_value lerp(T_value aStart, T_value aEnd, Clamped<T_interpolant> aInterpolant)
 {
-    return (Clamped<T_interpolant>::max_v - aInterpolant) * aStart
-           + aInterpolant * aEnd;
+    return (Clamped<T_interpolant>::max_v - aInterpolant.getValue()) * aStart
+           + aInterpolant.getValue() * aEnd;
 }
 
 
@@ -84,7 +84,7 @@ T_value lerp(std::pair<T_value, Clamped<T_interpolant>> aPrevious,
     // see: https://en.wikipedia.org/wiki/Linear_interpolation
     // Generic formula for y
     return aPrevious.first
-           + (aInterpolant - aPrevious.second)
+           + (aInterpolant.getValue() - aPrevious.second)
              * ( (aEnd - aPrevious.first) / (Clamped<T_interpolant>::max_v - aPrevious.second) );
 }
 

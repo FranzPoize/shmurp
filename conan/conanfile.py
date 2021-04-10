@@ -5,20 +5,24 @@ from os import path
 
 class ShmurpConan(ConanFile):
     name = "shmurp"
-    version = "0.0.0"
+    version = "local"
     license = "The Unlicense"
     author = "adnn"
     url = "https://github.com/Adnn/shmurp"
     description = "Shoot them urp!"
     topics = ("opengl", "2D", "game")
     settings = "os", "compiler", "build_type", "arch"
-    options = {"shared": [True, False]}
+    options = {
+        "shared": [True, False],
+    }
     default_options = {
         "shared": False,
+        "boost:layout": "versioned", #Should be system on non-Windows
     }
 
     requires = (
-        ("glad/0.1.29@bincrafters/stable"),
+        ("glad/0.1.33"),
+        ("boost/1.71.0"),
 
         ("aunteater/local"),
         ("graphics/local"),
@@ -43,6 +47,7 @@ class ShmurpConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions["CMAKE_PROJECT_Shmurp_INCLUDE"] = \
             path.join(self.source_folder, "cmake", "conan", "customconan.cmake")
+        cmake.definitions["Boost_USE_STATIC_LIBS"] = not self.options["boost"].shared
         cmake.configure()
         return cmake
 

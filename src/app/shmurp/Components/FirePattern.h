@@ -94,7 +94,7 @@ public:
         // Hardcode the possiblity to use an Iterative timer, with optional aIteration argument
         mTimer.forEachEvent(aDelta, [&, this](duration_t aRemainingTime, int aIteration = 0)
         {
-#if !defined(__clang__)
+#if 0
             // see: https://stackoverflow.com/q/61060240/1027706
             constexpr
 #endif

@@ -98,9 +98,12 @@ void KeyboardControl::update(const aunteater::Timer aTimer)
         switch(mCallback->mFiring)
         {
             case Edge::Press:
-                static const BulletConfig bulletConfig = configureBullet();
-                movable->add<FirePattern>(std::make_unique<Fire::Spray<30>>(pi<Radian<>>/180.f*7.5f, bulletConfig, 0.02f));
-                mCallback->mFiring = Edge::None;
+                //block is needed because https://docs.microsoft.com/en-us/cpp/error-messages/compiler-errors-1/compiler-error-c2360?view=msvc-160
+                {
+                    static const BulletConfig bulletConfig = configureBullet();
+                    movable->add<FirePattern>(std::make_unique<Fire::Spray<30>>(pi<Radian<>>/180.f*7.5f, bulletConfig, 0.02f));
+                    mCallback->mFiring = Edge::None;
+                }
                 break;
             case Edge::Release:
                 movable->remove<FirePattern>();
