@@ -1,0 +1,9 @@
+{
+    "downstream": "git@github.com:FranzPoize/shmurp.git",
+    "dependencies": [
+        "git@github.com:FranzPoize/aunteater.git",
+        "git@github.com:FranzPoize/graphics.git",
+        ["git@github.com:FranzPoize/math.git", "master"],
+        "git@github.com:FranzPoize/websocket.git"
+    ]
+}

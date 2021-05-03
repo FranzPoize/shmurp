@@ -17,12 +17,14 @@ class ShmurpConan(ConanFile):
     }
     default_options = {
         "shared": False,
-        "boost:layout": "versioned", #Should be system on non-Windows
+        "boost:layout": "system", #Should be system on non-Windows
+        "glad:api_version": "4.1",
+        "glad:extensions": "GL_KHR_debug, GL_ARB_texture_storage",
     }
 
     requires = (
-        ("glad/0.1.33"),
-        ("boost/1.71.0"),
+        ("glad/0.1.29@bincrafters/stable"),
+        ("boost/1.75.0"),
 
         ("aunteater/local"),
         ("graphics/local"),
